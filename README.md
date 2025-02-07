@@ -12,13 +12,22 @@ At the moment there is only support for [`InputField`](https://docs.unity3d.com/
 
 1. Import using this UPM
 ```
-https://github.com/StinkySteak/unity-webgl-copy-and-paste.git?path=Packages/WebGLCopyAndPaste
+https://github.com/StinkySteak/unity-webgl-copy-and-paste.git
 ```
 
-2. If you are using Legacy UI Text then navigate from `Tools > WebGLCopyPaste > EnableLegacyUISupport` or add this definition to the WebGL build
+2. Init the WebGL CopyPaste
 
+```cs
+WebGLCopyAndPaste.Init();
 ```
-// #define WEBGL_COPY_AND_PASTE_LEGACY_UI_SUPPORT
+
+**Recommended Usage**
+```cs
+[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+private static void Main()
+{
+    WebGLCopyAndPaste.Init();
+}
 ```
 
 ## Alternatives
@@ -53,44 +62,3 @@ The plugin has been tested an confirmed working on:
   2. Make your own [WebGL template](https://docs.unity3d.com/Manual/webgl-templates.html) and
      use [`user-select: none;`](https://developer.mozilla.org/en-US/docs/Web/CSS/user-select) in your CSS
      to make whatever parts of the page you want to prevent from being selected.
-
-## ChangeList
-
-* 0.3.0
-
-  * Added `Preserve` attribute to `WebGLCopyAndPasteAPI` class, and `AlwaysLinkAssembly` to the assembly,
-    so Unity doesn't strip the code if the plugin is moved to a package
-
-* 0.2.1
-
-  * Fixed paste not working on some browsers
-
-  * Fixed labels not being visually updated on some browsers
-
-  * Fixed potential null reference exception when `EventSystem.current` is null
-
-  * Substituted deprecated JavaScript `Window.event`
-
-* 0.2.0
-
-  * Fixes for Unity 2021.2
-
-* 0.1.0
-  
-  * Removed the need for MonoBehaviours
-  
-  * Replaced messages with proper callbacks
-
-  * Fixed data storing in `window`
-
-* 0.0.2
-
-  * Support cut
-
-  * Support Safari
-
-* 0.0.1
-
-  * Initial Release
-
-## License: BSD-3-Clause
